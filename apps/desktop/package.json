@@ -1,0 +1,29 @@
+{
+  "name": "@deepseek-ai/dsh-desktop",
+  "description": "Windows desktop shell for the dsh web profile: an Electron window over the packaged harness that boots `dsh web --port 0` as a child process",
+  "version": "0.1.0-rc.5",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "apps/desktop"
+  },
+  "type": "module",
+  "main": "lib/types/main.js",
+  "files": [
+    "lib/**"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "electron .",
+    "pack": "electron-builder --config electron-builder.yml --win portable"
+  },
+  "devDependencies": {
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^6.0.3"
+  }
+}

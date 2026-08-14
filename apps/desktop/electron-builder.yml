@@ -1,0 +1,39 @@
+# electron-builder configuration for the desktop shell. The packaged app is a
+# thin Electron window over the harness closure staged at out/harness by
+# scripts/build-desktop-exe.ts (extraResources keep the harness on real files
+# so Node module resolution and native addons work inside the packaged app).
+appId: ai.deepseek.harness
+productName: DeepSeek Harness
+asar: true
+files:
+  - lib/**/*
+  - package.json
+extraResources:
+  # The payload wraps the harness so its node_modules is a SUBdirectory of the
+  # copy root: electron-builder's filter hard-excludes a root-level node_modules
+  # before pattern matching. payload/* lands in resources/, so the packaged
+  # entry stays resources/harness/lib/bin.js.
+  - from: out/payload
+    filter:
+      - '**/*'
+      - '!**/*.map'
+directories:
+  output: release
+win:
+  target:
+    - target: portable
+      arch:
+        - x64
+    - target: nsis
+      arch:
+        - x64
+portable:
+  artifactName: DeepSeek-Harness-${version}-portable-${arch}.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  shortcutName: DeepSeek Harness
+  artifactName: DeepSeek-Harness-${version}-setup-${arch}.${ext}
+npmRebuild: false
