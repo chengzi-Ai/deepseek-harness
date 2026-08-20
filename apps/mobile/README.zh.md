@@ -13,9 +13,18 @@
 ## 安全
 
 远程服务器可以执行代码，因此只连接你自己控制的服务器，并优先通过
-Tailscale 或 VPN。桌面版的
+Tailscale 或 VPN。webserver 只绑定回环（`0.0.0.0` 为安全被禁用），因此通过
+随附的零依赖反向代理为手机提供服务：代理监听私有网卡并原样流转到回环的
+`dsh web`：
+
+```sh
+node apps/cli/src/bin.ts web --port 3081 --trusted-host 100.71.130.70:3080
+node apps/mobile/scripts/dsh-proxy.mjs 100.71.130.70 3080 3081
+```
+
+然后在应用中输入 `http://100.71.130.70:3080`。桌面版的
 [Agent Note](../../.agents/notes/implemented/architecture/2026-08-15-desktop-windows-distribution.md)
-描述了 harness 自身的绑定与信任围栏选项。
+描述了 harness 的绑定与信任围栏选项。
 
 ## 构建
 

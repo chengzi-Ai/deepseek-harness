@@ -13,9 +13,19 @@ example `https://your-server.example`, or a Tailscale/LAN address such as
 ## Security
 
 The remote server can execute code, so only connect to servers you control,
-preferably over Tailscale or a VPN. The desktop distribution's
+preferably over Tailscale or a VPN. The webserver binds only loopback
+(`0.0.0.0` is disabled for safety), so serve the phone through the bundled
+zero-dependency reverse proxy, which listens on the private interface and
+streams to a loopback `dsh web`:
+
+```sh
+node apps/cli/src/bin.ts web --port 3081 --trusted-host 100.71.130.70:3080
+node apps/mobile/scripts/dsh-proxy.mjs 100.71.130.70 3080 3081
+```
+
+Then enter `http://100.71.130.70:3080` in the app. The desktop distribution's
 [Agent Note](../../.agents/notes/implemented/architecture/2026-08-15-desktop-windows-distribution.md)
-describes the harness's own host bind and trust-fence options.
+describes the harness's host bind and trust-fence options.
 
 ## Build
 

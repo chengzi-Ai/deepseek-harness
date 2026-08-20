@@ -24,8 +24,11 @@ Capacitor Android 应用：WebView 全屏加载用户配置的远程 `dsh web` �
 
 桌面分发
 （[2026-08-15-desktop-windows-distribution.md](2026-08-15-desktop-windows-distribution.md)）
-描述了服务端：用 `dsh web --host <地址> --trusted-host <地址>:<端口>` 绑定到
-Tailscale/局域网网卡，而不是暴露公网。
+描述了服务端。webserver schema 只接受 `127.0.0.1` 或 `0.0.0.0`，而 web 启动
+刻意拒绝 `0.0.0.0`，因此手机无法直接在私有网卡上访问 harness。受支持的路由
+是：回环 `dsh web --port <p> --trusted-host <私有ip>:<端口>` 加零依赖反向代理
+`apps/mobile/scripts/dsh-proxy.mjs`，后者监听 Tailscale/局域网网卡并把每个
+请求（含 SSE）原样流转到回环服务器。
 
 ### 配置用 JSON 而非 TypeScript
 

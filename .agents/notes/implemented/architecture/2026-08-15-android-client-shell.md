@@ -27,9 +27,13 @@ inside the WebView.
 
 The desktop distribution
 ([2026-08-15-desktop-windows-distribution.md](2026-08-15-desktop-windows-distribution.md))
-describes the server side: bind to a Tailscale/LAN interface with
-`dsh web --host <address> --trusted-host <address>:<port>` rather than exposing
-the internet.
+describes the server side. The webserver schema accepts only `127.0.0.1` or
+`0.0.0.0`, and the web startup deliberately rejects `0.0.0.0`, so the phone
+cannot reach the harness directly on a private interface. The supported route
+is a loopback `dsh web --port <p> --trusted-host <private-ip>:<port>` plus the
+zero-dependency reverse proxy `apps/mobile/scripts/dsh-proxy.mjs` listening on
+the Tailscale/LAN interface and streaming every request (SSE included) to the
+loopback server unchanged.
 
 ### The config is JSON, not TypeScript
 

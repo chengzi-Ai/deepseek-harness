@@ -2,5 +2,5 @@
 # side as of the last confirmed-consistent state. Both languages carry equal authority;
 # after editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-08-15-android-client-shell.md
-README.md: dbbdcb1e410e18eef359db018c1a0c750e5ebbb9
-README.zh.md: eaea0ced100914a038b696e42e981d501923d473
+README.md: d77f31d0f648f9f690774e625a529ce934a5d870
+README.zh.md: 3aec5eb8847db87713a81f2f312a55427171fcde
