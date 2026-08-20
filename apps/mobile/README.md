@@ -19,9 +19,14 @@ zero-dependency reverse proxy, which listens on the private interface and
 streams to a loopback `dsh web`:
 
 ```sh
-node apps/cli/src/bin.ts web --port 3081 --trusted-host 100.71.130.70:3080
+node apps/cli/src/bin.ts web --patch apps/mobile/patches/web-browse-picker.patch.yml \
+  --port 3081 --trusted-host 100.71.130.70:3080
 node apps/mobile/scripts/dsh-proxy.mjs 100.71.130.70 3080 3081
 ```
+
+The patch pins the in-browser directory picker: the adaptive chooser would
+otherwise pick the native backend (a folder dialog on the server's desktop)
+which remote clients cannot see.
 
 Then enter `http://100.71.130.70:3080` in the app. The desktop distribution's
 [Agent Note](../../.agents/notes/implemented/architecture/2026-08-15-desktop-windows-distribution.md)

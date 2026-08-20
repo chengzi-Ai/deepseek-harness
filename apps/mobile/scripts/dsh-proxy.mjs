@@ -30,8 +30,18 @@ const server = http.createServer((req, res) => {
     },
   )
   upstream.on('error', () => {
+    // Mid-stream upstream failures (a dropped SSE connection) arrive after the
+    // response head is already written; only a fresh response may carry a 502.
+    if (res.headersSent) {
+      res.destroy()
+      return
+    }
     res.writeHead(502, { 'content-type': 'text/plain' })
     res.end('dsh-proxy: upstream unavailable')
+  })
+  req.on('error', () => upstream.destroy())
+  res.on('close', () => {
+    if (!res.writableEnded) upstream.destroy()
   })
   req.pipe(upstream)
 })

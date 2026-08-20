@@ -1,0 +1,14 @@
+# Pin the in-browser directory picker for remote clients. The adaptive chooser
+# picks the native backend when the server binds loopback (a Windows folder
+# dialog on the host's desktop), which a phone or remote browser can never
+# see. This overlay composes the browse pair directly instead, as the
+# directory-picker-auto package documents for pinning one interaction.
+- id: directory-picker
+  disabled: true
+
+- insert:
+    - id: directory-picker-browse
+      name: '@deepseek-ai/dsh-host-directory-picker-browse'
+
+    - id: ui-directory-picker-browse
+      name: '@deepseek-ai/dsh-client-ui-directory-picker-browse'

@@ -18,9 +18,13 @@ Tailscale 或 VPN。webserver 只绑定回环（`0.0.0.0` 为安全被禁用）�
 `dsh web`：
 
 ```sh
-node apps/cli/src/bin.ts web --port 3081 --trusted-host 100.71.130.70:3080
+node apps/cli/src/bin.ts web --patch apps/mobile/patches/web-browse-picker.patch.yml \
+  --port 3081 --trusted-host 100.71.130.70:3080
 node apps/mobile/scripts/dsh-proxy.mjs 100.71.130.70 3080 3081
 ```
+
+该补丁把目录选择器固定在浏览器内模式：自适应选择器在回环绑定时会选择原生
+后端（在服务器桌面弹出文件夹对话框），远程客户端无法看到。
 
 然后在应用中输入 `http://100.71.130.70:3080`。桌面版的
 [Agent Note](../../.agents/notes/implemented/architecture/2026-08-15-desktop-windows-distribution.md)
