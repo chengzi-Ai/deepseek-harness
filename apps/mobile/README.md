@@ -44,9 +44,9 @@ at first launch, so one APK serves any deployment.
 
 ## Known Limitations and Deferred Work
 
-- The only way to change the saved server URL is to clear the app's data
-  (system settings → apps → DeepSeek Harness → clear storage); an in-app
-  reconfiguration affordance is deferred.
+- The server address is changed by pressing the Android back button on the
+  remote GUI's entry page, which returns to the bundled setup screen
+  (`MainActivity` overrides `onBackPressed` when the WebView has no history).
 - There is no login flow in the app itself; protect the server side (auth
   proxy or private network) instead.
 - iOS is out of scope for now (requires a macOS build host and an Apple

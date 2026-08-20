@@ -42,8 +42,8 @@ Release 签名遵循 Capacitor/Android 标准流程（生成 keystore 后，用�
 
 ## 已知限制与后续工作
 
-- 更换已保存的服务器地址只能清除应用数据（系统设置 → 应用 → DeepSeek
-  Harness → 清除存储）；应用内重新配置入口已列入后续。
+- 更换服务器地址：在远程 GUI 入口页按 Android 返回键回到内置设置页
+  （`MainActivity` 在 WebView 无历史时重写了 `onBackPressed`）。
 - 应用本身没有登录流程；请在服务端做保护（认证代理或私有网络）。
 - iOS 暂不在范围内（需要 macOS 构建主机与 Apple 开发者账号）；
   `www/` 中的 Capacitor Web 资产是平台无关的。
