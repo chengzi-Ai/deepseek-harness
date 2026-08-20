@@ -1,0 +1,27 @@
+{
+  "name": "dsh-mobile",
+  "description": "Android client shell for the DeepSeek Harness web GUI: a Capacitor WebView that connects to a configured remote dsh web server",
+  "version": "0.1.0-rc.5",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "apps/mobile"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "cap:add:android": "cap add android",
+    "cap:sync": "cap sync android",
+    "cap:open:android": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/core": "^8.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.0"
+  }
+}

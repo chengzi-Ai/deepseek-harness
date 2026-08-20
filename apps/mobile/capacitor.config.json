@@ -1,0 +1,12 @@
+{
+  "appId": "ai.deepseek.harness.mobile",
+  "appName": "DeepSeek Harness",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": [
+      "*"
+    ]
+  }
+}
