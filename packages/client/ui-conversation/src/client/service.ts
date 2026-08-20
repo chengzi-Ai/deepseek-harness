@@ -19,6 +19,7 @@ import type { QueueAction, QueueItemId } from './contract/queue.ts'
 import type { ComposerBlocks } from './input/blocks.ts'
 import type { DraftAttachmentId, SessionInputResolver } from './input/contract.ts'
 import type { InputSubmitMode } from './contract/composer-submission.ts'
+import { randomUuid } from './random-uuid.ts'
 
 /**
  * The outward conversation face (`ctx.conversation`): the scope-addressed
@@ -62,7 +63,7 @@ export interface IConversation {
 function browserDraftAttachment(file: File): ComposerAttachment {
   return {
     kind: 'image',
-    id: crypto.randomUUID() as DraftAttachmentId,
+    id: randomUuid() as DraftAttachmentId,
     previewUrl: URL.createObjectURL(file),
     file,
   }
